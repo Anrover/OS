@@ -121,6 +121,7 @@ function main() {
     make_connect
     draw_map
     tput sc
+    set_cursor
     while true; do
         if [[ $PLAYING_CHAR = $CHAR ]]; 
             then make_move
