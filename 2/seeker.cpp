@@ -44,6 +44,5 @@ int main(int argc, char *argv[]) {
 			write(out, buffer + from, read_bytes);
 	} while (len != 0);
 	
-	
 	close(out);
 }
