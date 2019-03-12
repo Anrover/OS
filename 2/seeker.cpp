@@ -33,14 +33,14 @@ int main(int argc, char *argv[]) {
 				last_zero = false;
 			}
 			else if (buffer[i] == 0 && read_bytes != 0 && !last_zero) { //если встретили 0 и уже прочитали 1 байт и
-				write(out, buffer + from, read_bytes);			  //байт до этого был не 0, тогда записываем прочитанные байты
+				write(out, buffer + from, read_bytes);			        //байт до этого был не 0, тогда записываем прочитанные байты
 				read_bytes = 0;
 				last_zero = true;
 			}
 		}
-		if (read_bytes != 0 && last_zero)
+		if (last_zero)
 			lseek(out, read_bytes, SEEK_CUR);
-		else if (read_bytes != 0 && !last_zero)
+		else
 			write(out, buffer + from, read_bytes);
 	} while (len != 0);
 	
