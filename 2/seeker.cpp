@@ -43,6 +43,6 @@ int main(int argc, char *argv[]) {
 		else if (read_bytes != 0 && !last_zero)
 			write(out, buffer + from, read_bytes);
 	} while (len != 0);
-
+	
 	close(out);
 }
