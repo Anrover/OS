@@ -11,11 +11,11 @@ int main(int argc, char *argv[]) {
 		cout << "Invalid arguments" << endl;
 		return 0;
 	}
-    int out = open(argv[1], O_CREAT | O_WRONLY | O_TRUNC, 0644);
-    if (out < 0) {
-    	cout << "Cannot open file to write" << endl;
-        return 1;
-    }
+	int out = open(argv[1], O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	if (out < 0) {
+		cout << "Cannot open file to write" << endl;
+		return 1;
+	}
 	char buffer[BUFFER_SIZE];
 	bool last_zero = false;
 
