@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
 				read_bytes = 0;
 				last_zero = false;
 			}
-			else if (buffer[i] == 0 && !last_zero) {   // если встретили 0 и уже прочитали 1 байт и
+			else if (buffer[i] == 0 && !last_zero) {   // если встретили 0 и
 				write(out, buffer + from, read_bytes); // байт до этого был не 0, тогда записываем прочитанные байты
 				read_bytes = 0;
 				last_zero = true;
