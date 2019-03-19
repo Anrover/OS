@@ -84,6 +84,7 @@ function wait_enemy_move() {
 	set_cursor
 	put_char `get_enemy_char`
 	PLAYING_CHAR=$CHAR
+	while read -r -t 0; do read -r; done
 }
 
 function check_on_finished() {
@@ -93,16 +94,21 @@ function check_on_finished() {
 		z=${STEPS[WIN_COMBINATIONS[i+2]]}
 		if  [[ $x = $y ]] && [[ $y = $z ]] && [[ $x != "" ]]; then
 			tput rc
-			echo "!!!!"$x "is WINNER!!!!"
-			sleep 5
-			exit
-		elif [[ ${#STEPS[@]} = 9 ]]; then
-			tput rc
-			echo "..END OF THE GAME.."
+			if [[ $x = $CHAR ]]; then
+				echo "\ (•◡•) / Вы победили! \ (•◡•) / "
+			else
+				echo "(ಥ﹏ಥ) Вы проиграли (ಥ﹏ಥ)"
+			fi
 			sleep 5
 			exit
 		fi
 	done
+	if [[ ${#STEPS[@]} = 9 ]]; then
+			tput rc
+			echo "¯\_(ツ)_/¯ НИЧЬЯ ¯\_(ツ)_/¯"
+			sleep 5
+			exit
+	fi
 }
 
 function make_connect() {
@@ -127,7 +133,6 @@ function main() {
             then make_move
             else wait_enemy_move
         fi
-
         check_on_finished
     done
 }
