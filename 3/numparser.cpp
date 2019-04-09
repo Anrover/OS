@@ -49,7 +49,7 @@ int main(int argc, char *argv[]) {
 	for (int i = 1; i < argc - 1; i++)
 	{
 		infile.open(argv[i]);
-	    if(!infile.is_open()) {
+		if(!infile.is_open()) {
 			cout << "Error open" << endl;
 			return 0;
 	   	}
@@ -59,7 +59,7 @@ int main(int argc, char *argv[]) {
 	sort(numbers.begin(), numbers.end(), cmp_number_strings);
 	
 	ofstream out(argv[argc - 1]);
-    if (!out.is_open()) {
+	if (!out.is_open()) {
 		cout << "Cannot open file to write" << endl;
 		return 0;
 	}
