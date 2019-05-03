@@ -165,6 +165,8 @@ void *server_thread(void *arg) {
 }
 
 int main(int argc, char const *argv[]) {
+    // аргументом передаём файл с картой
+    // в первой строке задаётся: height width
     if (argc != 2) {
         cout << "Invalid arguments" << endl;
         return 0;
