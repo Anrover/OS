@@ -203,7 +203,7 @@ void hup_handler(int s) {
 	command_list.clear();
     pid_list.clear();
     command_type_list.clear();
-   	pid_count = 0;
+	pid_count = 0;
 
     //по новой инициализируем
     init();
