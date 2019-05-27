@@ -18,7 +18,7 @@ public:
     int **map;
   
 
-    g_life(int w, int h, int **m) { 
+    g_life(int w, int h, int **m) {
         width = w;
         height = h;
         map = m;
@@ -93,26 +93,32 @@ g_life read_gmap(ifstream &file) {
     return life;
 }
 
+struct step_thread_args {
+    g_life *iglife;
+    bool completed;
+};
+
+void *step_thread(void *arg) {
+    step_thread_args *args = (step_thread_args*)arg;
+    args->iglife->update_generation();
+    args->completed = true;
+}
+
 //основной метод-поток для генерации карты игры Жизнь. Также определяет превышение лимита времени
 void *game_thread(void *arg) {
     g_life glife = *(g_life*)arg;
-    double duration; 
-    struct timespec start, end; 
+    step_thread_args args;
+    pthread_t p_step;
+    args.iglife = &glife;
     while (true) {
-        // system ("clear");
-        // printf("-----\n%s-----\n", glife.get_str_map().c_str());
-        clock_gettime(CLOCK_MONOTONIC, &start); 
-
-        //генерируем новое состояние
-        glife.update_generation();
-
-        clock_gettime(CLOCK_MONOTONIC, &end);
-        duration = (end.tv_sec - start.tv_sec) * 1e9; 
-        duration = (duration + (end.tv_nsec - start.tv_nsec)) * 1e-9;
-        if (duration > 1)
-            cout << "Slow generation. Duration = " << duration << endl;
-        else
-            usleep((1 - duration) * 1e6);
+        args.completed = false;
+        pthread_create(&p_step, NULL, step_thread, &args);
+        sleep(1);
+        if (!args.completed) {
+            cout << "Slow generation!" << endl;
+            //exit or break or complete??? 
+        }
+        pthread_join(p_step, NULL);
     }
 }
 

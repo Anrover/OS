@@ -13,7 +13,7 @@ int main(int argc, char const *argv[])
 { 
     int sock = 0, valread; 
     struct sockaddr_in serv_addr; 
-    int buffer_size = 1024;
+    const int buffer_size = 1024;
     char buffer[buffer_size] = {0};
     memset(&serv_addr, '0', sizeof(serv_addr)); 
        
