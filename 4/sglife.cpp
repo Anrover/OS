@@ -116,7 +116,7 @@ void *game_thread(void *arg) {
         sleep(1);
         if (!args.completed) {
             cout << "Slow generation!" << endl;
-            //exit or break or complete??? 
+            //exit or break or continue work? 
         }
         pthread_join(p_step, NULL);
     }
